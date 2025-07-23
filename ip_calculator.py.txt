@@ -1,0 +1,253 @@
+import speech_recognition as sr
+import pyttsx3 as pt
+r=sr.Recognizer()
+tts=pt.Engine()
+def c():
+    if a1<0:
+        talk("Enter Valid Subnet Mask: ")
+        print("Enter Valid Subnet Mask: ")
+    else:
+        if n>32:
+            talk("Enter Valid subnet Mask")
+            print("Enter Valid subnet Mask")
+        elif n>=24:
+            bit24()
+        elif n>=16:
+            bit16()
+        elif n>=8:
+            bit8()
+def bit24():
+    a,b,c,d=8,8,8,n-24
+    p,q,r,s=8-a,8-b,8-c,8-d
+    if d == 1:
+        da = 128
+    elif d==2:
+        da = 192
+    elif d==3:
+        da = 224
+    elif d==4:
+        da = 240
+    elif d==5:
+        da = 248
+    elif d==6:
+        da = 252
+    elif d==7:
+        da = 254
+    elif d==8:
+        da = 255
+    else:
+        da = 0
+    talk("Network Bit is ")
+    print("Network Bit              :",a,b,c,d)
+    talk("Host Bit is")
+    print("Host Bit                 :",p,q,r,s)
+    P = A & 2**a-1
+    Q = B & 2**b-1
+    R = C & 2**c-1
+    S = D & da
+    talk("Network ID Is ")
+    print("Network ID Is            :",P,".",Q,".",R,".",S)
+    E = 2**p-1+P
+    F = 2**q-1+Q
+    G = 2**r-1+R
+    H = 2**s-1+S
+    talk("Broadcast ID Is ")
+    print("Broadcast ID Is          :",E,".",F,".",G,".",H)
+    talk("First Valid Host IP Is ")
+    print("First Valid Host IP Is   :",P,".",Q,".",R,".",S+1)
+    talk("Last Valid Host IP Is ")
+    print("Last Valid Host IP Is    :",E,".",F,".",G,".",H-1)
+    talk("Host per subnet is ")
+    print("Host per subnet is       :",2**(32-n)-2)
+    talk("Total Subnet is ")
+    print("Total Subnet is          :",2**a1)
+    
+    a2=("Broadcast ID Is          :",E,".",F,".",G,".",H )   
+    b2=("First Valid Host IP Is   :",P,".",Q,".",R,".",S+1) 
+    c2=("Last Valid Host IP Is    :",E,".",F,".",G,".",H-1) 
+    d2=("Host per subnet is       :",2**(32-n)-2)           
+    e2=("Total Subnet is          :",2**a1)
+    f2=(a2,b2,c2,d2,e2) 
+    talk("do u want these information if yess say qr code")
+    print("do u want these information if yes say qr code")
+    a=micc()
+    if a=="QR code":
+        import qrcode as qr
+        b=qr.make(f2)
+        b.save("inf3.jpg")
+    else:
+        print("okay no problem") 
+def bit16():
+    a,b,c,d=8,8,n-16,0
+    p,q,r,s=8-a,8-b,8-c,8-d
+    if  c == 1:
+        da = 128
+    elif c==2:
+        da = 192
+    elif c==3:
+        da = 224
+    elif c==4:
+        da = 240
+    elif c==5:
+        da = 248
+    elif c==6:
+        da = 252
+    elif c==7:
+        da = 254
+    elif c==8:
+        da = 255
+    else:
+        da = 0
+    talk("Network Bit is ")
+    print("Network Bit              :",a,b,c,d)
+    talk("Host Bit is")
+    print("Host Bit                 :",p,q,r,s)
+    P = A & 2**a-1
+    Q = B & 2**b-1
+    R = C & da
+    S = D & 2**d-1
+    talk("Network ID Is ")
+    print("Network ID Is            :",P,".",Q,".",R,".",S)
+    E = 2**p-1+P
+    F = 2**q-1+Q
+    G = 2**r-1+R
+    H = 2**s-1+S
+    talk("Broadcast ID Is ")
+    print("Broadcast ID Is          :",E,".",F,".",G,".",H)
+    talk("First Valid Host IP Is ")
+    print("First Valid Host IP Is   :",P,".",Q,".",R,".",S+1)
+    talk("Last Valid Host IP Is ")
+    print("Last Valid Host IP Is    :",E,".",F,".",G,".",H-1)
+    talk("Host per subnet is ")
+    print("Host per subnet is       :",2**(32-n)-2)
+    talk("Total Subnet is ")
+    print("Total Subnet is          :",2**a1)
+    print("do u want these information in your phone ")
+    a=micc()
+    if a=="QR code":
+        import qrcode as qr
+        b=qr.make("Broadcast ID Is          :",E,".",F,".",G,".",H)   \
+                 ("First Valid Host IP Is   :",P,".",Q,".",R,".",S+1) \
+                 ("Last Valid Host IP Is    :",E,".",F,".",G,".",H-1) \
+                 ("Host per subnet is       :",2**(32-n)-2)           \
+                 ("Total Subnet is          :",2**a1)
+        b.save("inf2.jpg")
+    elif a=="mail":
+        print("mail walal pura")
+    else:
+        print("okay no problem")  
+def bit8():
+    a,b,c,d=8,n-8,0,0
+    p,q,r,s=8-a,8-b,8-c,8-d
+    if b == 1:
+        da = 128
+    elif b==2:
+        da = 192
+    elif b==3:
+        da = 224
+    elif b==4:
+        da = 240
+    elif b==5:
+        da = 248
+    elif b==6:
+        da = 252
+    elif b==7:
+        da = 254
+    elif b==8:
+        da = 255
+    else:
+        da = 0
+    talk("Network Bit is ")
+    print("Network Bit              :",a,b,c,d)
+    talk("Host Bit is")
+    print("Host Bit                 :",p,q,r,s)
+    P = A & 2**a-1
+    Q = B & da
+    R = C & 2**c-1
+    S = D & 2**d-1
+    talk("Network ID Is :")
+    print("Network ID Is            :",P,".",Q,".",R,".",S)
+    E = 2**p-1+P
+    F = 2**q-1+Q
+    G = 2**r-1+R
+    H = 2**s-1+S
+    talk("Broadcast ID Is ")
+    print("Broadcast ID Is          :",E,".",F,".",G,".",H)
+    talk("First Valid Host IP Is ")
+    print("First Valid Host IP Is   :",P,".",Q,".",R,".",S+1)
+    talk("Last Valid Host IP Is ")
+    print("Last Valid Host IP Is    :",E,".",F,".",G,".",H-1)
+    talk("Host per subnet is ")
+    print("Host per subnet is       :",2**(32-n)-2)
+    talk("Total Subnet is ")
+    print("Total Subnet is          :",2**a1)
+    talk("do u want these information in your phone ")
+    print("do u want these information in your phone ")
+    a=micc()
+    if a=="QR code":
+        import qrcode as qr
+        b=qr.make("Broadcast ID Is          :",E,".",F,".",G,".",H)   \
+                 ("First Valid Host IP Is   :",P,".",Q,".",R,".",S+1) \
+                 ("Last Valid Host IP Is    :",E,".",F,".",G,".",H-1) \
+                 ("Host per subnet is       :",2**(32-n)-2)           \
+                 ("Total Subnet is          :",2**a1)
+        b.save("inf1.jpg")
+    elif a=="mail":
+        print("mail walal pura")
+    else:
+        print("okay no problem")
+def talk(text):
+    tts.say(text)
+    tts.runAndWait()
+def mic():
+    with sr.Microphone() as source:
+        text=r.listen(source)
+        voice=r.recognize_google(text)
+        print(int(voice))
+        return int(voice)
+def micc():
+    with sr.Microphone() as source:
+        text=r.listen(source)
+        voice=r.recognize_google(text)
+        print(voice)
+        return (voice)
+
+#Actual Code!!!
+talk("Welcome to Ip Addressing Hub ")
+talk("Here we show all the information of Ip address")
+talk("Speak first octet")
+print("1st octet")
+A =mic()
+talk("Speak second octet")
+print("2nd octet")
+B =mic()
+talk("Speak third octet")
+print("3rd octet")
+C =mic()
+talk("Speak fourth octet")
+print("4th octet")
+D =mic()
+talk("Ip Address Is ")
+print("Ip Address Is :",A,".",B,".",C,".",D)
+talk("speak The subnet Mask in range of 8 to 32 ")
+print("speak The subnet Mask in range 8-32 in form/:")
+n=mic()
+if A<128 and B<256 and C<256 and D<256:
+    u=8
+    a1=n-u
+    c()
+elif A<192 and B<256 and C<256 and D<256:
+    u=16
+    a1=n-u
+    c()
+elif A<240 and B<256 and C<256 and D<256:
+    u=24
+    a1=n-u
+    c()
+elif A<256 and B<256 and C<256 and D<256:
+    u=32
+    a1=n-u
+    c()
+else:
+    talk("Enter valid Ip Address")
+    print("Enter valid Ip Address")
